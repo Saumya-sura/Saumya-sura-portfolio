@@ -140,13 +140,12 @@ class _MobileHomePageState extends State<MobileHomePage>
                                 "https://www.instagram.com/saumyasura/"),
                           );
                         },
-                      ),
-                      LinkIconCard(
-                        title: "Blog",
-                        icon: Icons.article,
+                      ),                      LinkIconCard(
+                        title: "LinkedIn",
+                        icon: SimpleIcons.linkedin,
                         onTap: () {
                           launchUrl(
-                            Uri.parse("https://blog.manangandhi.tech/"),
+                            Uri.parse("https://www.linkedin.com/in/saumya-sura-a73734270/"),
                           );
                         },
                       ),
@@ -178,8 +177,7 @@ class _MobileHomePageState extends State<MobileHomePage>
                   },
                 ),
               ),
-              const SizedBox(height: 16),
-              Text(
+              const SizedBox(height: 16),              Text(
                 "Developed by Saumya Sura",
                 style: TextStyle(
                   fontSize: 18,
@@ -188,23 +186,6 @@ class _MobileHomePageState extends State<MobileHomePage>
                   color: context.watch<ColorProvider>().color.computeLuminance() > 0.5
                       ? Colors.black
                       : Colors.white,
-                ),
-              ),
-              const SizedBox(height: 8),
-              GestureDetector(
-                onTap: () {
-                  launchUrl(
-                    Uri.parse("https://github.com/MananGandhi1810/Portfolio-Website"),
-                  );
-                },
-                child: Text(
-                  "View Source Code",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: context.watch<ColorProvider>().color,
-                    decoration: TextDecoration.underline,
-                  ),
                 ),
               ),
             ],
