@@ -21,6 +21,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool isSmallScreen = false;
+  // Device switcher state
+  DeviceType _selectedDevice = DeviceType.iphone;
+
+  // Enum for device types
+  // Removed unused static constants
+
+  // DeviceType enum
+  // (Add this above _HomePageState if not present)
+  // enum DeviceType { iphone, tablet }
 
   @override
   void initState() {
@@ -67,10 +76,45 @@ class _HomePageState extends State<HomePage> {
               maxStarSize: 5,
             ),
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                SizedBox(height: 24),
+                // Device Switcher Buttons
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () => setState(() => _selectedDevice = DeviceType.iphone),
+                      child: Text('iPhone'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: _selectedDevice == DeviceType.iphone ? Colors.blue : Colors.grey,
+                      ),
+                    ),
+                    SizedBox(width: 16),
+                    ElevatedButton(
+                      onPressed: () => setState(() => _selectedDevice = DeviceType.android),
+                      child: Text('Android'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: _selectedDevice == DeviceType.android ? Colors.blue : Colors.grey,
+                      ),
+                    ),
+                    SizedBox(width: 16),
+                    ElevatedButton(
+                      onPressed: () => setState(() => _selectedDevice = DeviceType.tablet),
+                      child: Text('Tablet'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: _selectedDevice == DeviceType.tablet ? Colors.blue : Colors.grey,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 24),
+                // Main content row
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: !isSmallScreen
                     ? ClipRRect(
@@ -119,8 +163,8 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ),
-              ),
-              Center(
+                  ),
+                  Center(
                 child: ConstrainedBox(
                   constraints: BoxConstraints(
                     maxWidth: MediaQuery.of(context).size.width * 0.5,
@@ -128,7 +172,11 @@ class _HomePageState extends State<HomePage> {
                   ),
                   child: DeviceFrame(
                     isFrameVisible: true,
-                    device: Devices.android.onePlus8Pro,
+                    device: _selectedDevice == DeviceType.iphone
+                        ? Devices.ios.iPhone13ProMax
+                        : _selectedDevice == DeviceType.android
+                            ? Devices.android.samsungGalaxyA50
+                            : Devices.ios.iPad,
                     screen: Builder(
                       builder: (BuildContext deviceContext) {
                         return MultiProvider(
@@ -159,8 +207,8 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-              ),
-              Padding(
+                  ),
+                  Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: !isSmallScreen
                     ? ClipRRect(
@@ -210,10 +258,16 @@ class _HomePageState extends State<HomePage> {
                         ),
                       ),
               ),
-            ],
-          ),
-        ],
-      ),
-    );
+                ], // end Row children
+              ), // end Row
+            ], // end Column children
+          ), 
+          )// end SingleChildScrollView
+        ], // end Stack children
+      ), // end Stack
+    ); // end Scaffold
   }
 }
+
+// Add this enum above _HomePageState if not present
+enum DeviceType { iphone, android, tablet }
