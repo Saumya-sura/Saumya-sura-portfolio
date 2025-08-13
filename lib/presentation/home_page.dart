@@ -84,28 +84,25 @@ class _HomePageState extends State<HomePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    ElevatedButton(
-                      onPressed: () => setState(() => _selectedDevice = DeviceType.iphone),
-                      child: Text('iPhone'),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: _selectedDevice == DeviceType.iphone ? Colors.blue : Colors.grey,
-                      ),
+                    _buildDeviceIcon(
+                      icon: Icons.phone_iphone,
+                      label: 'iPhone',
+                      selected: _selectedDevice == DeviceType.iphone,
+                      onTap: () => setState(() => _selectedDevice = DeviceType.iphone),
                     ),
-                    SizedBox(width: 16),
-                    ElevatedButton(
-                      onPressed: () => setState(() => _selectedDevice = DeviceType.android),
-                      child: Text('Android'),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: _selectedDevice == DeviceType.android ? Colors.blue : Colors.grey,
-                      ),
+                    SizedBox(width: 24),
+                    _buildDeviceIcon(
+                      icon: Icons.android,
+                      label: 'Android',
+                      selected: _selectedDevice == DeviceType.android,
+                      onTap: () => setState(() => _selectedDevice = DeviceType.android),
                     ),
-                    SizedBox(width: 16),
-                    ElevatedButton(
-                      onPressed: () => setState(() => _selectedDevice = DeviceType.tablet),
-                      child: Text('Tablet'),
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: _selectedDevice == DeviceType.tablet ? Colors.blue : Colors.grey,
-                      ),
+                    SizedBox(width: 24),
+                    _buildDeviceIcon(
+                      icon: Icons.tablet,
+                      label: 'Tablet',
+                      selected: _selectedDevice == DeviceType.tablet,
+                      onTap: () => setState(() => _selectedDevice = DeviceType.tablet),
                     ),
                   ],
                 ),
@@ -267,6 +264,62 @@ class _HomePageState extends State<HomePage> {
       ), // end Stack
     ); // end Scaffold
   }
+
+  Widget _buildDeviceIcon({
+  required IconData icon,
+  required String label,
+  required bool selected,
+  required VoidCallback onTap,
+}) {
+  return GestureDetector(
+    onTap: onTap,
+    child: Column(
+      children: [
+        AnimatedContainer(
+          duration: Duration(milliseconds: 200),
+          curve: Curves.easeOut,
+          padding: EdgeInsets.all(8),
+          decoration: BoxDecoration(
+            gradient: selected
+                ? LinearGradient(
+                    colors: [Colors.blueAccent, Colors.purpleAccent],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                  )
+                : null,
+            color: selected ? null : Colors.grey.withOpacity(0.08),
+            borderRadius: BorderRadius.circular(16),
+            boxShadow: selected
+                ? [BoxShadow(color: Colors.blue.withOpacity(0.3), blurRadius: 8, offset: Offset(0, 2))]
+                : [],
+            border: Border.all(
+              color: selected ? Colors.blue : Colors.transparent,
+              width: 2,
+            ),
+          ),
+          child: AnimatedScale(
+            scale: selected ? 1.15 : 1.0,
+            duration: Duration(milliseconds: 200),
+            child: Icon(
+              icon,
+              color: selected ? Colors.white : Colors.grey,
+              size: 36,
+            ),
+          ),
+        ),
+        SizedBox(height: 6),
+        Text(
+          label,
+          style: TextStyle(
+            color: selected ? Colors.blue : Colors.grey,
+            fontWeight: selected ? FontWeight.bold : FontWeight.normal,
+            fontSize: 13,
+          ),
+        ),
+      ],
+    ),
+  );
+}
 }
 
 // Add this enum above _HomePageState if not present
