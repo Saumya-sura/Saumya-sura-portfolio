@@ -12,7 +12,7 @@ import 'projects_page.dart';
 import 'skills_page.dart';
 
 class MobileHomePage extends StatefulWidget {
-  const MobileHomePage({super.key, this.color = Colors.blue});
+  const MobileHomePage({super.key, this.color = Colors.black});
 
   final Color color;
 
