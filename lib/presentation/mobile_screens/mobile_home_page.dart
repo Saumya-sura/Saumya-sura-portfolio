@@ -19,7 +19,6 @@ class MobileHomePage extends StatefulWidget {
   @override
   State<MobileHomePage> createState() => _MobileHomePageState();
 }
-
 class _MobileHomePageState extends State<MobileHomePage>
     with SingleTickerProviderStateMixin {
   AnimationController? _animationController;
