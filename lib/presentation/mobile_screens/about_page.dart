@@ -102,6 +102,7 @@ class _AboutScreenState extends State<AboutPage> with SingleTickerProviderStateM
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: Text(
                       'Web and Mobile Development Enthusiast',
+                      
                       style: TextStyle(
                         fontSize: screenWidth > 600 ? 25 : 20,
                         fontWeight: FontWeight.w500,
