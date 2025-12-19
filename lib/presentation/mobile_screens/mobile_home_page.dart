@@ -24,6 +24,7 @@ class _MobileHomePageState extends State<MobileHomePage>
   AnimationController? _animationController;
   Tween<double>? _tween;
 
+
   @override
   void initState() {
     _animationController = AnimationController(
