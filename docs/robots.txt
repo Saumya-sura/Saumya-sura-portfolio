@@ -1,6 +1,8 @@
+
 User-agent: *
 Allow: /
-Sitemap: https://saumya-sura.github.io/Saumya-sura-portfolio/sitemap.xml
+Sitemap: https://saumya-sura.github.io/Saumya-Sura-Portfolio/sitemap.xml
+
 User-agent: *
 Allow: /
 Sitemap: https://saumya-sura.github.io/Saumya-sura-portfolio/sitemap.xml
