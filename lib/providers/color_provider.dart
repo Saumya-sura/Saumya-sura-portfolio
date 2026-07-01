@@ -7,7 +7,6 @@ class ColorProvider extends ChangeNotifier {
 
   ColorProvider({Color color = Colors.blue}) {
     _color = color;
-    notifyListeners();
   }
 
   void setColor(Color color) {

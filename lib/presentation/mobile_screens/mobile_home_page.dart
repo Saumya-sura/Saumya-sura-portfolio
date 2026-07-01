@@ -46,12 +46,6 @@ class _MobileHomePageState extends State<MobileHomePage>
 
   @override
   Widget build(BuildContext context) {
-    if (context.watch<ColorProvider>().color != widget.color) {
-      Future.delayed(const Duration(milliseconds: 100), () {
-        context.read<ColorProvider>().setColor(widget.color);
-      });
-    }
-
     return Scaffold(
       appBar: AppBar(
         title: const Text(

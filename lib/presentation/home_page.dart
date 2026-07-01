@@ -20,7 +20,6 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool isSmallScreen = false;
   // Device switcher state
   DeviceType _selectedDevice = DeviceType.iphone;
 
@@ -37,22 +36,14 @@ class _HomePageState extends State<HomePage> {
   }
 
   @override
-  void didChangeDependencies() {
-    setState(() {
-      MediaQuery.of(context).size.width < 1024
-          ? isSmallScreen = true
-          : isSmallScreen = false;
-    });
-    super.didChangeDependencies();
-  }
-
-  @override
   void dispose() {
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    final bool isSmallScreen = MediaQuery.of(context).size.width < 1024;
+
     return Scaffold(
       body: Stack(
         children: [
