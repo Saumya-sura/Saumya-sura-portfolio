@@ -13,7 +13,7 @@ class LinkIconCard extends StatefulWidget {
 
   final String title;
   final VoidCallback onTap;
-  final IconData icon;
+  final dynamic icon; // Can be IconData or Widget
 
   @override
   State<LinkIconCard> createState() => _LinkIconCardState();
@@ -22,6 +22,9 @@ class LinkIconCard extends StatefulWidget {
 class _LinkIconCardState extends State<LinkIconCard> {
   @override
   Widget build(BuildContext context) {
+    final themeColor = context.watch<ColorProvider>().color;
+    final foregroundColor = themeColor.computeLuminance() > 0.5 ? Colors.black : Colors.white;
+
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
@@ -43,31 +46,30 @@ class _LinkIconCardState extends State<LinkIconCard> {
                 shape: BoxShape.circle,
               ),
               child: CircleAvatar(
-                radius: 35,
-                backgroundColor: context.watch<ColorProvider>().color,
-                child: Icon(
-                  widget.icon,
-                  size: 50,
-                  color:
-                      context.read<ColorProvider>().color.computeLuminance() >
-                              0.5
-                          ? Colors.black
-                          : Colors.white,
-                ),
+                radius: 30,
+                backgroundColor: themeColor,
+                child: widget.icon is IconData
+                    ? Icon(
+                        widget.icon as IconData,
+                        size: 32,
+                        color: foregroundColor,
+                      )
+                    : ClipOval(
+                        child: Container(
+                          padding: const EdgeInsets.all(14),
+                          child: widget.icon as Widget,
+                        ),
+                      ),
               ),
             ),
-            const Padding(
-              padding: EdgeInsets.all(8.0),
-            ),
+            const SizedBox(height: 8),
             Text(
               widget.title,
+              textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 20,
-                color:
-                    context.read<ColorProvider>().color.computeLuminance() >
-                            0.5
-                        ? Colors.black
-                        : Colors.white,
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                color: foregroundColor,
               ),
             ),
           ],
@@ -76,3 +78,4 @@ class _LinkIconCardState extends State<LinkIconCard> {
     );
   }
 }
+

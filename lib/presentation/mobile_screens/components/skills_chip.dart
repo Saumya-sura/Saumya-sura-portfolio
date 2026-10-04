@@ -7,7 +7,7 @@ class SkillsChip extends StatefulWidget {
   const SkillsChip({super.key, required this.skillName, required this.icon});
 
   final String skillName;
-  final IconData icon;
+  final dynamic icon; // Can be IconData or Widget
 
   @override
   State<SkillsChip> createState() => _SkillsChipState();
@@ -16,6 +16,9 @@ class SkillsChip extends StatefulWidget {
 class _SkillsChipState extends State<SkillsChip> {
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+    final iconColor = isDark ? Colors.white : Colors.black;
+
     return Chip(
       side: BorderSide(
         color: Provider.of<ColorProvider>(context).color.withOpacity(0.5),
@@ -25,17 +28,18 @@ class _SkillsChipState extends State<SkillsChip> {
         widget.skillName,
         style: TextStyle(
           fontSize: 20,
-          color: Theme.of(context).brightness == Brightness.dark
-              ? Colors.white
-              : Colors.black,
+          color: isDark ? Colors.white : Colors.black,
         ),
       ),
-      avatar: Icon(
-        widget.icon,
-        color: Theme.of(context).brightness == Brightness.dark
-            ? Colors.white
-            : Colors.black,
-      ),
+      avatar: widget.icon is IconData
+          ? Icon(
+              widget.icon as IconData,
+              color: iconColor,
+            )
+          : Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: widget.icon as Widget,
+            ),
     );
   }
 }

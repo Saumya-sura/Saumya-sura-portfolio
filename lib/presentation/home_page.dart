@@ -6,6 +6,7 @@ import 'package:starsview/config/StarsConfig.dart';
 import 'package:starsview/starsview.dart';
 
 import '../providers/color_provider.dart';
+import '../providers/phone_state_provider.dart';
 import 'components/about_me.dart';
 import 'components/blurred_background_container.dart';
 import 'components/blurred_background_popup.dart';
@@ -169,14 +170,15 @@ class _HomePageState extends State<HomePage> {
                       builder: (BuildContext deviceContext) {
                         return MultiProvider(
                           providers: [
-                            ChangeNotifierProvider<ColorProvider>(
-                              create: (deviceContext) => ColorProvider(
-                                color: context.watch<ColorProvider>().color,
-                              ),
+                            ChangeNotifierProvider<ColorProvider>.value(
+                              value: context.watch<ColorProvider>(),
+                            ),
+                            ChangeNotifierProvider<PhoneStateProvider>.value(
+                              value: context.watch<PhoneStateProvider>(),
                             ),
                           ],
                           child: MaterialApp(
-                            title: 'Saumya sura',
+                            title: 'Saumya Sura',
                             theme: ThemeData(
                               colorScheme: ColorScheme.fromSeed(
                                 seedColor: context.watch<ColorProvider>().color,

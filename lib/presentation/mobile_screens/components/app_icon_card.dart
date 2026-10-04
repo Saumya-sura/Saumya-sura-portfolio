@@ -48,11 +48,11 @@ class _AppIconCardState extends State<AppIconCard> {
                   shape: BoxShape.circle,
                 ),
                 child: CircleAvatar(
-                  radius: 35,
+                  radius: 30,
                   backgroundColor: context.watch<ColorProvider>().color,
                   child: Icon(
                     widget.icon,
-                    size: 50,
+                    size: 34,
                     color:
                         context.read<ColorProvider>().color.computeLuminance() >
                                 0.5
@@ -61,13 +61,13 @@ class _AppIconCardState extends State<AppIconCard> {
                   ),
                 ),
               ),
-              const Padding(
-                padding: EdgeInsets.all(8.0),
-              ),
+              const SizedBox(height: 8),
               Text(
                 widget.title,
+                textAlign: TextAlign.center,
                 style: TextStyle(
-                  fontSize: 20,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
                   color:
                       context.read<ColorProvider>().color.computeLuminance() >
                               0.5

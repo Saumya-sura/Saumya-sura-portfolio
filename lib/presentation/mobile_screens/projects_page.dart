@@ -61,19 +61,19 @@ class ProjectsPage extends StatelessWidget {
                   ' An app for Mantra meditation.',
               projectLink: 'https://code.mpst.me/',
               projectTechnologies: [
-               'flutter',
+                'Flutter',
                 'SQLite',
-                
               ],
             ),
             ProjectCard(
               projectName: 'Fitness Tracking App',
               projectDescription:
-                  ' Fitness app with AI-powered food suggestions.',
-              projectLink: 'https://chess.manangandhi.tech/',
+                  'Fitness app with AI-powered food suggestions and personalized workouts.',
+              projectLink: 'https://github.com/Saumya-sura',
               projectTechnologies: [
                 'Flutter',
-                'Gemini APi'
+                'Gemini API',
+                'AI/ML',
               ],
             ), 
           ],

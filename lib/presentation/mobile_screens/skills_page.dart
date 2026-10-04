@@ -71,7 +71,7 @@ class _SkillsPageState extends State<SkillsPage> {
   List<Map<String, dynamic>> tools = [
     {
       "skillName": "VSCode",
-      "icon": SimpleIcons.visualstudiocode,
+      "icon": Icons.code,
     },
     {
       "skillName": "Android Studio",
@@ -80,7 +80,7 @@ class _SkillsPageState extends State<SkillsPage> {
    
     {
       "skillName": "Windows",
-      "icon": SimpleIcons.windows,
+      "icon": Icons.grid_view,
     },
    
     {
@@ -237,19 +237,46 @@ class _SkillsPageState extends State<SkillsPage> {
                       ],
                     ),
                     const SizedBox(height: 20),
-                    Text(
-                      "Skills",
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: context.watch<ColorProvider>().color,
-                      ),
+                    const SizedBox(height: 24),
+                    const DividerWithText(text: "Core Proficiency Metrics"),
+                    const SizedBox(height: 12),
+                    const SkillBar(
+                      skill: "Flutter & Mobile Apps",
+                      level: 0.95,
+                      icon: SimpleIcons.flutter,
+                      proficiencyLabel: "Production Ready",
                     ),
-                    const SizedBox(height: 10),
-                    SkillBar(skill: "Flutter", level: 0.9),
-                    SkillBar(skill: "React", level: 0.8),
-                    SkillBar(skill: "Python", level: 0.85),
-                    SkillBar(skill: "Dart", level: 0.75),
+                    const SkillBar(
+                      skill: "Dart Ecosystem",
+                      level: 0.90,
+                      icon: SimpleIcons.dart,
+                      proficiencyLabel: "Advanced",
+                    ),
+                    const SkillBar(
+                      skill: "Firebase & Cloud Backends",
+                      level: 0.85,
+                      icon: SimpleIcons.firebase,
+                      proficiencyLabel: "Advanced",
+                    ),
+                    const SkillBar(
+                      skill: "Python & Gemini AI APIs",
+                      level: 0.82,
+                      icon: SimpleIcons.python,
+                      proficiencyLabel: "Proficient",
+                    ),
+                    const SkillBar(
+                      skill: "C / C++ & DSA",
+                      level: 0.80,
+                      icon: SimpleIcons.cplusplus,
+                      proficiencyLabel: "Proficient",
+                    ),
+                    const SkillBar(
+                      skill: "Node.js & REST APIs",
+                      level: 0.78,
+                      icon: SimpleIcons.nodedotjs,
+                      proficiencyLabel: "Intermediate",
+                    ),
+                    const SizedBox(height: 16),
                   ],
                 );
               },
