@@ -80,7 +80,7 @@ class _EducationPageState extends State<EducationPage>
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                // Animated Academic Hero Badge (Replaced giant school icon)
+                // Academic Hero Badge
                 ScaleTransition(
                   scale: _scaleAnimation,
                   child: Container(
@@ -101,7 +101,7 @@ class _EducationPageState extends State<EducationPage>
                         ),
                       ],
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Icon(
                         Icons.school_rounded,
                         size: 40,
@@ -134,20 +134,106 @@ class _EducationPageState extends State<EducationPage>
                 // Education Items
                 const EducationCard(
                   title: "B.Tech in Computer Engineering",
-                  instituteName: "Mukesh Patel School of Technology Management and Engineering (NMIMS)",
-                  duration: "2022 - 2028",
+                  instituteName: "Mukesh Patel School of Technology Management and Engineering, Mumbai",
+                  duration: "Expected Graduation: 2028",
                   url: "https://engineering.nmims.edu/",
                   icon: Icons.account_balance_rounded,
-                  score: "In Progress",
+                  score: "Expected: 2028",
                 ),
+
                 const EducationCard(
                   title: "Secondary School Certificate (SSC)",
                   instituteName: "Rustomjee International School, Mumbai",
-                  duration: "2010 - 2022",
+                  duration: "Graduated: 2022",
                   url: "",
                   icon: Icons.history_edu_rounded,
-                  score: "Completed",
+                  score: "Graduated: 2022",
                 ),
+
+                // Research Publication Academic Highlight
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                  child: Card(
+                    elevation: 4,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      side: BorderSide(
+                        color: Colors.amberAccent.withOpacity(0.4),
+                        width: 1.2,
+                      ),
+                    ),
+                    color: isDark ? const Color(0xFF1E1E26) : Colors.white,
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.all(12),
+                            decoration: BoxDecoration(
+                              color: Colors.amberAccent.withOpacity(0.15),
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                color: Colors.amberAccent.withOpacity(0.4),
+                                width: 1,
+                              ),
+                            ),
+                            child: const Icon(
+                              Icons.workspace_premium_rounded,
+                              color: Colors.amberAccent,
+                              size: 26,
+                            ),
+                          ),
+                          const SizedBox(width: 14),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Springer Research Co-Author",
+                                  style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                    color: isDark ? Colors.white : Colors.black87,
+                                  ),
+                                ),
+                                const SizedBox(height: 4),
+                                Text(
+                                  "FICTA 2025 International Conference Proceedings",
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    color: isDark ? Colors.white70 : Colors.black54,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                                const SizedBox(height: 8),
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 10,
+                                    vertical: 4,
+                                  ),
+                                  decoration: BoxDecoration(
+                                    color: Colors.amberAccent.withOpacity(0.15),
+                                    borderRadius: BorderRadius.circular(20),
+                                  ),
+                                  child: const Text(
+                                    "FICTA 2025 Publication",
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.amberAccent,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+
                 const SizedBox(height: 20),
               ],
             ),

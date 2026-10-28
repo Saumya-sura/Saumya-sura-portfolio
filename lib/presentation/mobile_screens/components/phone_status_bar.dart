@@ -77,7 +77,7 @@ class _PhoneStatusBarState extends State<PhoneStatusBar> {
               ),
 
               // Spacer for Dynamic Island in center
-              const SizedBox(width: 120),
+              const Spacer(),
 
               // Right: Signal, WiFi, Battery
               Row(
@@ -116,7 +116,9 @@ class _PhoneStatusBarState extends State<PhoneStatusBar> {
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 350),
                 curve: Curves.easeOutCubic,
-                width: isExpanded ? 310 : 120,
+                width: isExpanded
+                    ? (MediaQuery.of(context).size.width * 0.88).clamp(240.0, 310.0)
+                    : 120,
                 height: isExpanded ? 64 : 28,
                 padding: EdgeInsets.symmetric(
                   horizontal: isExpanded ? 14 : 10,

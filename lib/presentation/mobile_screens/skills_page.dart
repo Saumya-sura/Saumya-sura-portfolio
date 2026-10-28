@@ -15,167 +15,80 @@ class SkillsPage extends StatefulWidget {
 }
 
 class _SkillsPageState extends State<SkillsPage> {
-  List<Map<String, dynamic>> languages = [
-    {
-      "skillName": "C",
-      "icon": SimpleIcons.c,
-    },
-    {
-      "skillName": "C++",
-      "icon": SimpleIcons.cplusplus,
-    },
-    {
-      "skillName": "Python",
-      "icon": SimpleIcons.python,
-    },
-    {
-      "skillName": "Dart",
-      "icon": SimpleIcons.dart,
-    },
-    {
-      "skillName": "Kotlin",
-      "icon": SimpleIcons.kotlin,
-    },
-    {
-      "skillName": "Javascript",
-      "icon": SimpleIcons.javascript,
-    },
-   
+  // 1. Languages (From Resume)
+  final List<Map<String, dynamic>> languages = [
+    {"skillName": "C++", "icon": SimpleIcons.cplusplus},
+    {"skillName": "Python", "icon": SimpleIcons.python},
+    {"skillName": "SQL", "icon": Icons.storage_rounded},
+    {"skillName": "Java", "icon": Icons.coffee_rounded},
+    {"skillName": "Dart", "icon": SimpleIcons.dart},
+    {"skillName": "Bash", "icon": SimpleIcons.gnubash},
+    {"skillName": "C", "icon": SimpleIcons.c},
+    {"skillName": "JavaScript", "icon": SimpleIcons.javascript},
   ];
 
-  List<Map<String, dynamic>> librariesAndFrameworks = [
-    {
-      "skillName": "Flutter",
-      "icon": SimpleIcons.flutter,
-    },
-    
-   
-    {
-      "skillName": "Node.js",
-      "icon": SimpleIcons.nodedotjs,
-    },
-    {
-      "skillName": "Express.js",
-      "icon": SimpleIcons.express,
-    },
-    
-     
-    {
-      "skillName": "Bootstrap",
-      "icon": SimpleIcons.bootstrap,
-    },
-   
-   
+  // 2. Cloud & DevOps (From Resume)
+  final List<Map<String, dynamic>> cloudDevOps = [
+    {"skillName": "GCP (Google Cloud)", "icon": SimpleIcons.googlecloud},
+    {"skillName": "Docker", "icon": SimpleIcons.docker},
+    {"skillName": "Linux", "icon": SimpleIcons.linux},
+    {"skillName": "Terraform", "icon": SimpleIcons.terraform},
+    {"skillName": "Jenkins", "icon": SimpleIcons.jenkins},
+    {"skillName": "Ansible", "icon": SimpleIcons.ansible},
+    {"skillName": "GitHub Actions", "icon": SimpleIcons.githubactions},
+    {"skillName": "CI/CD", "icon": Icons.sync_alt_rounded},
+    {"skillName": "Nginx", "icon": SimpleIcons.nginx},
+    {"skillName": "Git & GitHub", "icon": SimpleIcons.github},
   ];
 
-  List<Map<String, dynamic>> tools = [
-    {
-      "skillName": "VSCode",
-      "icon": Icons.code,
-    },
-    {
-      "skillName": "Android Studio",
-      "icon": SimpleIcons.androidstudio,
-    },
-   
-    {
-      "skillName": "Windows",
-      "icon": Icons.grid_view,
-    },
-   
-    {
-      "skillName": "Ubuntu",
-      "icon": SimpleIcons.ubuntu,
-    },
-   
-    {
-      "skillName": "Postman",
-      "icon": SimpleIcons.postman,
-    },
-    {
-      "skillName": "Git",
-      "icon": SimpleIcons.git,
-    },
-    {
-      "skillName": "GitHub",
-      "icon": SimpleIcons.github,
-    },
-    {
-      "skillName": "GitLab",
-      "icon": SimpleIcons.docker,
-    },
-    {
-      "skillName": "GitHub Actions",
-      "icon": SimpleIcons.githubactions,
-    },
-    {
-      "skillName": "Netlify",
-      "icon": SimpleIcons.netlify,
-    },
-    {
-      "skillName": "MongoDB",
-      "icon": SimpleIcons.mongodb,
-    },
-   
-    
-    {
-      "skillName": "Google Colab",
-      "icon": SimpleIcons.googlecolab,
-    },
-    {
-      "skillName": "Jupyter",
-      "icon": SimpleIcons.jupyter,
-    },
-    
-   
-    {
-      "skillName": "Firebase",
-      "icon": SimpleIcons.firebase,
-    },
-    {
-      "skillName": "Supabase",
-      "icon": SimpleIcons.supabase,
-    },
-    {
-      "skillName": "Appwrite",
-      "icon": SimpleIcons.appwrite,
-    },
-    {
-      "skillName": "Figma",
-      "icon": SimpleIcons.figma,
-    },
-    {
-      "skillName": "Wix",
-      "icon": SimpleIcons.wix,
-    },
+  // 3. Backend (From Resume)
+  final List<Map<String, dynamic>> backend = [
+    {"skillName": "Node.js", "icon": SimpleIcons.nodedotjs},
+    {"skillName": "Express.js", "icon": SimpleIcons.express},
+    {"skillName": "Flask", "icon": SimpleIcons.flask},
+    {"skillName": "REST APIs", "icon": Icons.api_rounded},
+    {"skillName": "MongoDB", "icon": SimpleIcons.mongodb},
+    {"skillName": "Postman", "icon": SimpleIcons.postman},
+  ];
+
+  // 4. Mobile Development (From Resume)
+  final List<Map<String, dynamic>> mobileDev = [
+    {"skillName": "Flutter", "icon": SimpleIcons.flutter},
+    {"skillName": "Supabase", "icon": SimpleIcons.supabase},
+    {"skillName": "Firebase", "icon": SimpleIcons.firebase},
+    {"skillName": "Mobile CI/CD", "icon": Icons.phone_android_rounded},
+    {"skillName": "GetX", "icon": Icons.bolt_rounded},
+    {"skillName": "Hive DB", "icon": Icons.inventory_2_outlined},
+    {"skillName": "Android Studio", "icon": SimpleIcons.androidstudio},
+    {"skillName": "VS Code", "icon": Icons.code_rounded},
+    {"skillName": "Figma", "icon": SimpleIcons.figma},
   ];
 
   @override
   Widget build(BuildContext context) {
+    final themeColor = context.watch<ColorProvider>().color;
+
     return Scaffold(
       appBar: AppBar(
         iconTheme: IconThemeData(
-          color: context.watch<ColorProvider>().color.computeLuminance() > 0.5
-              ? Colors.black
-              : Colors.white,
+          color: themeColor.computeLuminance() > 0.5 ? Colors.black : Colors.white,
         ),
         centerTitle: true,
         title: Text(
-          'Skills',
+          'Technical Skills',
           style: TextStyle(
-            color: context.watch<ColorProvider>().color.computeLuminance() > 0.5
-                ? Colors.black
-                : Colors.white,
+            color: themeColor.computeLuminance() > 0.5 ? Colors.black : Colors.white,
+            fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: context.watch<ColorProvider>().color,
+        backgroundColor: themeColor,
       ),
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
-              context.watch<ColorProvider>().color.withOpacity(0.8),
-              context.watch<ColorProvider>().color.withOpacity(0.4),
+              themeColor.withOpacity(0.8),
+              themeColor.withOpacity(0.4),
             ],
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -189,55 +102,79 @@ class _SkillsPageState extends State<SkillsPage> {
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    // Cloud & DevOps Section
+                    const DividerWithText(text: "Cloud & DevOps"),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      alignment: constraints.maxWidth > 600
+                          ? WrapAlignment.center
+                          : WrapAlignment.start,
+                      children: [
+                        for (var item in cloudDevOps)
+                          SkillsChip(
+                            skillName: item["skillName"],
+                            icon: item["icon"],
+                          ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+
+                    // Mobile Development Section
+                    const DividerWithText(text: "Mobile Development"),
+                    Wrap(
+                      spacing: 8,
+                      runSpacing: 8,
+                      alignment: constraints.maxWidth > 600
+                          ? WrapAlignment.center
+                          : WrapAlignment.start,
+                      children: [
+                        for (var item in mobileDev)
+                          SkillsChip(
+                            skillName: item["skillName"],
+                            icon: item["icon"],
+                          ),
+                      ],
+                    ),
+                    const SizedBox(height: 20),
+
+                    // Languages Section
                     const DividerWithText(text: "Languages"),
                     Wrap(
-                      spacing: 10,
-                      runSpacing: 10,
+                      spacing: 8,
+                      runSpacing: 8,
                       alignment: constraints.maxWidth > 600
                           ? WrapAlignment.center
                           : WrapAlignment.start,
                       children: [
-                        for (int i = 0; i < languages.length; i++)
+                        for (var item in languages)
                           SkillsChip(
-                            skillName: languages[i]["skillName"],
-                            icon: languages[i]["icon"],
+                            skillName: item["skillName"],
+                            icon: item["icon"],
                           ),
                       ],
                     ),
                     const SizedBox(height: 20),
-                    const DividerWithText(text: "Libraries/Frameworks"),
+
+                    // Backend Section
+                    const DividerWithText(text: "Backend & APIs"),
                     Wrap(
-                      spacing: 10,
-                      runSpacing: 10,
+                      spacing: 8,
+                      runSpacing: 8,
                       alignment: constraints.maxWidth > 600
                           ? WrapAlignment.center
                           : WrapAlignment.start,
                       children: [
-                        for (int i = 0; i < librariesAndFrameworks.length; i++)
+                        for (var item in backend)
                           SkillsChip(
-                            skillName: librariesAndFrameworks[i]["skillName"],
-                            icon: librariesAndFrameworks[i]["icon"],
+                            skillName: item["skillName"],
+                            icon: item["icon"],
                           ),
                       ],
                     ),
-                    const SizedBox(height: 20),
-                    const DividerWithText(text: "Tools"),
-                    Wrap(
-                      spacing: 10,
-                      runSpacing: 10,
-                      alignment: constraints.maxWidth > 600
-                          ? WrapAlignment.center
-                          : WrapAlignment.start,
-                      children: [
-                        for (int i = 0; i < tools.length; i++)
-                          SkillsChip(
-                            skillName: tools[i]["skillName"],
-                            icon: tools[i]["icon"],
-                          ),
-                      ],
-                    ),
-                    const SizedBox(height: 20),
                     const SizedBox(height: 24),
+
+                    // Core Proficiency Metrics
                     const DividerWithText(text: "Core Proficiency Metrics"),
                     const SizedBox(height: 12),
                     const SkillBar(
@@ -247,34 +184,34 @@ class _SkillsPageState extends State<SkillsPage> {
                       proficiencyLabel: "Production Ready",
                     ),
                     const SkillBar(
-                      skill: "Dart Ecosystem",
-                      level: 0.90,
+                      skill: "Cloud & DevOps (GCP, Docker, CI/CD)",
+                      level: 0.88,
+                      icon: SimpleIcons.googlecloud,
+                      proficiencyLabel: "Advanced",
+                    ),
+                    const SkillBar(
+                      skill: "Dart Ecosystem & State Management",
+                      level: 0.92,
                       icon: SimpleIcons.dart,
                       proficiencyLabel: "Advanced",
                     ),
                     const SkillBar(
-                      skill: "Firebase & Cloud Backends",
+                      skill: "Backend (Node.js, Flask, Supabase)",
                       level: 0.85,
-                      icon: SimpleIcons.firebase,
-                      proficiencyLabel: "Advanced",
+                      icon: SimpleIcons.nodedotjs,
+                      proficiencyLabel: "Proficient",
                     ),
                     const SkillBar(
-                      skill: "Python & Gemini AI APIs",
-                      level: 0.82,
+                      skill: "Python & AI API Integrations",
+                      level: 0.85,
                       icon: SimpleIcons.python,
                       proficiencyLabel: "Proficient",
                     ),
                     const SkillBar(
-                      skill: "C / C++ & DSA",
-                      level: 0.80,
+                      skill: "Languages (C++, Java, SQL, Bash)",
+                      level: 0.82,
                       icon: SimpleIcons.cplusplus,
                       proficiencyLabel: "Proficient",
-                    ),
-                    const SkillBar(
-                      skill: "Node.js & REST APIs",
-                      level: 0.78,
-                      icon: SimpleIcons.nodedotjs,
-                      proficiencyLabel: "Intermediate",
                     ),
                     const SizedBox(height: 16),
                   ],

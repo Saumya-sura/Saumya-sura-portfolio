@@ -212,7 +212,7 @@ class _ColorPickerState extends State<ColorPicker> {
         final item = colorsList[index];
         final Color col = item['color'];
         final String name = item['name'];
-        final isSelected = currentColor.value == col.value;
+        final isSelected = currentColor.toARGB32() == col.toARGB32();
 
         return Tooltip(
           message: name,

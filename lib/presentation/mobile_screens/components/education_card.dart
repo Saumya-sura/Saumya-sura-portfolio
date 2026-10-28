@@ -43,7 +43,10 @@ class EducationCard extends StatelessWidget {
           borderRadius: BorderRadius.circular(16),
           onTap: url.isNotEmpty
               ? () {
-                  launchUrl(Uri.parse(url));
+                  launchUrl(
+                    Uri.parse(url),
+                    mode: LaunchMode.externalApplication,
+                  );
                 }
               : null,
           child: Padding(

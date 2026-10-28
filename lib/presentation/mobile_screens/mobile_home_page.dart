@@ -9,16 +9,17 @@ import 'about_page.dart';
 import 'components/app_icon_card.dart';
 import 'components/link_icon_card.dart';
 import 'components/phone_status_bar.dart';
+import 'devops_visualizer_page.dart';
 import 'education_page.dart';
+import 'experience_page.dart';
+import 'leadership_page.dart';
 import 'projects_page.dart';
 import 'skills_page.dart';
 import 'terminal_page.dart';
 
 class MobileHomePage extends StatefulWidget {
   const MobileHomePage({super.key, this.color = Colors.black});
-
   final Color color;
-
   @override
   State<MobileHomePage> createState() => _MobileHomePageState();
 }
@@ -27,7 +28,6 @@ class _MobileHomePageState extends State<MobileHomePage>
     with SingleTickerProviderStateMixin {
   AnimationController? _animationController;
   Tween<double>? _tween;
-
   @override
   void initState() {
     _animationController = AnimationController(
@@ -58,7 +58,6 @@ class _MobileHomePageState extends State<MobileHomePage>
     final themeColor = context.watch<ColorProvider>().color;
     final isLight = themeColor.computeLuminance() > 0.5;
     final textColor = isLight ? Colors.black : Colors.white;
-
     final items = [
       AppIconCard(
         title: "About Me",
@@ -66,14 +65,29 @@ class _MobileHomePageState extends State<MobileHomePage>
         onTap: const AboutPage(),
       ),
       AppIconCard(
+        title: "Experience",
+        icon: Icons.work_rounded,
+        onTap: const ExperiencePage(),
+      ),
+      AppIconCard(
         title: "Projects",
         icon: Icons.code_rounded,
         onTap: const ProjectsPage(),
       ),
       AppIconCard(
+        title: "DevOps Lab",
+        icon: Icons.cloud_sync_rounded,
+        onTap: const DevOpsVisualizerPage(),
+      ),
+      AppIconCard(
         title: "Skills",
         icon: Icons.auto_awesome_rounded,
         onTap: const SkillsPage(),
+      ),
+      AppIconCard(
+        title: "Leadership",
+        icon: Icons.workspace_premium_rounded,
+        onTap: const LeadershipPage(),
       ),
       AppIconCard(
         title: "Education",
@@ -89,14 +103,10 @@ class _MobileHomePageState extends State<MobileHomePage>
         title: "GitHub",
         icon: SimpleIcons.github,
         onTap: () {
-          launchUrl(Uri.parse("https://github.com/Saumya-sura"));
-        },
-      ),
-      LinkIconCard(
-        title: "Email",
-        icon: Icons.mail_rounded,
-        onTap: () {
-          launchUrl(Uri.parse("mailto:surasaumya17@protonmail.com"));
+          launchUrl(
+            Uri.parse("https://github.com/Saumya-sura"),
+            mode: LaunchMode.externalApplication,
+          );
         },
       ),
       LinkIconCard(
@@ -111,14 +121,30 @@ class _MobileHomePageState extends State<MobileHomePage>
           ),
         ),
         onTap: () {
-          launchUrl(Uri.parse("https://www.linkedin.com/in/saumya-sura-a73734270/"));
+          launchUrl(
+            Uri.parse("https://www.linkedin.com/in/saumya-sura-a73734270/"),
+            mode: LaunchMode.externalApplication,
+          );
+        },
+      ),
+      LinkIconCard(
+        title: "Email",
+        icon: Icons.mail_rounded,
+        onTap: () {
+          launchUrl(
+            Uri.parse("mailto:surasaumya17@gmail.com"),
+            mode: LaunchMode.externalApplication,
+          );
         },
       ),
       LinkIconCard(
         title: "Instagram",
         icon: SimpleIcons.instagram,
         onTap: () {
-          launchUrl(Uri.parse("https://www.instagram.com/saumyasura/"));
+          launchUrl(
+            Uri.parse("https://www.instagram.com/saumyasura/"),
+            mode: LaunchMode.externalApplication,
+          );
         },
       ),
     ];
@@ -163,11 +189,11 @@ class _MobileHomePageState extends State<MobileHomePage>
                           ),
                         ),
                         Text(
-                          'Flutter & Web Developer',
+                          'Flutter • Cloud & DevOps • Springer Co-Author',
                           style: TextStyle(
                             fontWeight: FontWeight.w500,
-                            fontSize: 12,
-                            color: textColor.withOpacity(0.8),
+                            fontSize: 11.5,
+                            color: textColor.withOpacity(0.85),
                           ),
                         ),
                       ],
@@ -176,7 +202,9 @@ class _MobileHomePageState extends State<MobileHomePage>
                       message: "Virtual Phone Simulator",
                       child: GestureDetector(
                         onTap: () {
-                          context.read<PhoneStateProvider>().triggerNotification(
+                          context
+                              .read<PhoneStateProvider>()
+                              .triggerNotification(
                                 title: "Virtual Phone 📱",
                                 subtitle: "Interactive mobile phone simulation",
                                 icon: Icons.phone_iphone_rounded,
@@ -213,7 +241,8 @@ class _MobileHomePageState extends State<MobileHomePage>
                   padding: const EdgeInsets.symmetric(horizontal: 14.0),
                   child: GridView.builder(
                     padding: const EdgeInsets.only(bottom: 12),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
                       crossAxisSpacing: 14,
                       mainAxisSpacing: 14,
@@ -238,7 +267,8 @@ class _MobileHomePageState extends State<MobileHomePage>
                           child: Material(
                             elevation: 4,
                             borderRadius: BorderRadius.circular(16),
-                            color: Theme.of(context).cardColor.withOpacity(0.92),
+                            color:
+                                Theme.of(context).cardColor.withOpacity(0.92),
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: items[index],

@@ -5,6 +5,8 @@ class LeftIntroText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       mainAxisSize: MainAxisSize.min,
@@ -14,9 +16,7 @@ class LeftIntroText extends StatelessWidget {
           style: TextStyle(
             fontSize: 30,
             fontWeight: FontWeight.bold,
-            color: Theme.of(context).brightness == Brightness.dark
-                ? Colors.white
-                : Colors.black,
+            color: isDark ? Colors.white : Colors.black,
           ),
         ),
         RichText(
@@ -26,9 +26,7 @@ class LeftIntroText extends StatelessWidget {
                 text: 'I am ',
                 style: TextStyle(
                   fontSize: 20,
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? Colors.white
-                      : Colors.black,
+                  color: isDark ? Colors.white : Colors.black,
                 ),
               ),
               TextSpan(
@@ -36,12 +34,19 @@ class LeftIntroText extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Theme.of(context).brightness == Brightness.dark
-                      ? Colors.white
-                      : Colors.black,
+                  color: isDark ? Colors.white : Colors.black,
                 ),
               ),
             ],
+          ),
+        ),
+        const SizedBox(height: 6),
+        Text(
+          'Flutter Developer • Cloud & DevOps • Springer Co-Author',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            fontSize: 13,
+            color: isDark ? Colors.white70 : Colors.black54,
           ),
         ),
       ],

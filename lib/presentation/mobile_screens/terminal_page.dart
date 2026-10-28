@@ -7,6 +7,7 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../providers/color_provider.dart';
 import '../../providers/phone_state_provider.dart';
+import '../../services/sound_service.dart';
 
 class TerminalPage extends StatefulWidget {
   const TerminalPage({super.key});
@@ -27,11 +28,17 @@ class _TerminalPageState extends State<TerminalPage> {
   final List<String> _quickCommands = [
     'help',
     'about',
+    'architecture',
+    'cicd',
+    'experience',
     'projects',
     'skills',
+    'leadership',
+    'research',
+    'education',
+    'contact',
     'hire',
     'matrix',
-    'contact',
     'clear',
   ];
 
@@ -43,17 +50,18 @@ class _TerminalPageState extends State<TerminalPage> {
 
   void _startBootSequence() async {
     final bootLines = [
-      '[OK] Initializing SAUMYA-OS v2.6.4 (arm64) ...',
-      '[OK] Loading Flutter Engine & CanvasKit ...',
-      '[OK] Mounting /home/saumya/projects ...',
-      '───────────────────────────────────────────────',
-      'SAUMYA SURA • Interactive Terminal v2.6',
-      "Type 'help' or tap the command chips below.",
-      '───────────────────────────────────────────────',
+      '[OK] Initializing SAUMYA-OS v2.8 (arm64/linux) ...',
+      '[OK] Mounting /home/saumya/resume_data ...',
+      '[OK] Loading GCP Cloud Shell & Docker daemon ...',
+      '────────────────────────────────────────────────────────',
+      'SAUMYA SURA • Interactive Terminal v2.8',
+      'Flutter Developer • Springer Co-Author • Cloud & DevOps',
+      "Type 'help' or tap command chips below to explore.",
+      '────────────────────────────────────────────────────────',
     ];
 
     for (var line in bootLines) {
-      await Future.delayed(const Duration(milliseconds: 180));
+      await Future.delayed(const Duration(milliseconds: 160));
       if (mounted) {
         setState(() {
           _history.add({'type': 'system', 'text': line});
@@ -67,11 +75,10 @@ class _TerminalPageState extends State<TerminalPage> {
         _isBooting = false;
       });
 
-      // Announce via Dynamic Island
       try {
         context.read<PhoneStateProvider>().triggerNotification(
-              title: 'Terminal Active 💻',
-              subtitle: "Try typing 'hire' or 'matrix'!",
+              title: 'Terminal Online 💻',
+              subtitle: "Try 'architecture', 'cicd', or 'experience'",
               icon: Icons.terminal_rounded,
               iconColor: Colors.greenAccent,
             );
@@ -85,6 +92,8 @@ class _TerminalPageState extends State<TerminalPage> {
 
     if (cmd.isEmpty) return;
 
+    SoundService().playKey();
+
     setState(() {
       _history.add({'type': 'input', 'text': 'saumya@portfolio:~\$ $rawCommand'});
     });
@@ -93,80 +102,159 @@ class _TerminalPageState extends State<TerminalPage> {
       case 'help':
         _addOutput([
           'AVAILABLE COMMANDS:',
-          '  about     - Learn about Saumya Sura & background',
-          '  projects  - List flagship mobile & web projects',
-          '  skills    - Display technical skills & proficiencies',
-          '  education - Details on B.Tech at NMIMS MPSTME',
-          '  contact   - Get email, GitHub, and social links',
-          '  hire      - Internship availability & direct hire action',
-          '  matrix    - Toggle cyberpunk digital rain stream',
-          '  clear     - Clear the terminal screen',
-          '  sudo      - Execute command as superuser',
+          '  about         - Summary, headline & background info',
+          '  architecture  - Interactive GCP cloud infrastructure topology',
+          '  cicd          - GitHub Actions 5-stage automated deployment pipeline',
+          '  experience    - 3 Software engineering internships',
+          '  projects      - Cloud infra & mobile flagship projects',
+          '  skills        - Technical skills across DevOps, Mobile, Backend',
+          '  leadership    - FinDrome Managing Director & Tech Head',
+          '  research      - Springer Research Co-Author (FICTA 2025)',
+          '  education     - B.Tech @ MPSTME (2028) & SSC @ Rustomjee',
+          '  contact       - Email, GitHub, LinkedIn details',
+          '  hire          - Open email client for immediate hire/internship',
+          '  matrix        - Toggle animated Matrix digital rain',
+          '  clear         - Clear the screen',
+          '  sudo          - Execute command with elevated permissions',
+        ]);
+        break;
+
+      case 'architecture':
+      case 'gcp':
+        _addOutput([
+          'GCP INFRASTRUCTURE TOPOLOGY:',
+          '1. Google Cloud DNS: Global Anycast routing & SSL domain validation',
+          '2. HTTP(S) Load Balancer: Auto SSL termination (Google-managed), HTTP->HTTPS 301',
+          '3. VPC Firewall & IAM: Strict ingress CIDRs, IAP Bastion, least privilege',
+          '4. Compute Engine MIG: Autoscaling Nginx reverse proxies, health check auto-healing',
+          '5. Cloud Storage (GCS): Multi-regional media & static asset hosting',
+          '6. gcloud Automation: Cloud Shell CLI scripts for automated server updates',
+        ]);
+        break;
+
+      case 'cicd':
+      case 'pipeline':
+        _addOutput([
+          'GITHUB ACTIONS CI/CD PIPELINE FLOW:',
+          '• Stage 1 [Checkout]: actions/checkout@v4 + Flutter SDK v3.24.3 setup',
+          '• Stage 2 [Lint]: flutter analyze --fatal-infos (0 errors, 100% clean)',
+          '• Stage 3 [Testing]: flutter test --coverage (14/14 test suites passed)',
+          '• Stage 4 [Docker]: Multi-stage container build -> gcr.io/viscosity-prod/app',
+          '• Stage 5 [Deploy]: Google IAM authentication -> SSH Compute Engine VM reload',
+          'Status: PASSING (Average duration: 1m 42s)',
         ]);
         break;
 
       case 'about':
         _addOutput([
           'SAUMYA SURA',
-          '• B.Tech Computer Engineering Student @ NMIMS MPSTME, Mumbai',
-          '• Passionate Flutter, Mobile, and Web Developer',
-          '• Creator of MPSTME OnTrack with 1,400+ downloads',
-          '• Enjoys UI/UX design, AI integration, and competitive chess ♟️',
+          'Flutter Developer • Springer Research Co-Author • Cloud & DevOps Enthusiast',
+          '• Computer Engineering student at MPSTME (NMIMS), Mumbai',
+          '• Completed 3 software engineering internships spanning Flutter & Cloud',
+          '• Experienced in deploying cloud infrastructure on GCP & CI/CD automation',
+          '• Springer research co-author (FICTA 2025)',
+        ]);
+        break;
+
+      case 'experience':
+        _addOutput([
+          'SOFTWARE ENGINEERING INTERNSHIPS:',
+          '',
+          '1. Viscosity India (Tech Intern) | May 2026 - Sep 2026 | Mumbai, India',
+          '   • Developed & deployed BODMAS Calculator, integrated into web app.',
+          '   • Maintained automated GitHub Actions CI/CD pipeline delivering to server.',
+          '',
+          '2. Brown Bird Ventures (Flutter Intern) | Nov 2024 - Jan 2025 | Mumbai, India',
+          '   • Built AI-powered pet care recommendations & chatbot using ChatGPT API & GetX.',
+          '   • Designed chatbot with 5+ parameters (breed, age, weight, diet) improving accuracy.',
+          '',
+          '3. Sayge Tech (Flutter Intern) | May 2025 - July 2025 | Mumbai, India',
+          '   • Managed 3 Flutter apps, delivering 20+ feature enhancements & UI upgrades.',
+          '   • Delivered client-specific branding, responsive layouts, & configurations.',
         ]);
         break;
 
       case 'projects':
         _addOutput([
           'FLAGSHIP PROJECTS:',
-          '1. MPSTME OnTrack 📱',
-          '   • Schedule & timetable tracking for university students.',
-          '   • 1,400+ downloads across Apple App Store & Google Play Store.',
-          '2. TOT App 🐾',
-          '   • Pet care app with Hive local DB, Firebase, and OpenAI API.',
-          '3. WellVerse 🧘',
-          '   • Meditation & wellness tracking with offline SQLite storage.',
-          '4. Fitness AI 🏋️',
-          '   • Gemini AI-powered meal recommendations & fitness tracker.',
+          '',
+          '1. Scalable Web Infrastructure on Google Cloud Platform (GCP)',
+          '   • Compute Engine, Managed Instance Groups, HTTP(S) Load Balancer, Cloud Storage.',
+          '   • Google-managed SSL, IAM, VPC firewalls, Cloud DNS, automatic HTTPS redirect.',
+          '   • Automated deployments via Cloud Shell, SSH, Nginx, and gcloud CLI.',
+          '',
+          '2. FindLy (Real-Time Lost And Found System)',
+          '   • Flutter + Supabase lost & found platform with metadata-based filtering.',
+          '   • Offline persistence, retry synchronization, & privacy contact sharing.',
+          '',
+          '3. MPSTME OnTrack (Campus Navigation & Alert Platform)',
+          '   • Offline-first campus map & timetable navigation with over-the-air updates.',
+          '   • 1,500+ downloads on Apple App Store & Google Play Store.',
+          '',
+          '4. Brown Bird Pet Care AI (TOT App)',
+          '   • AI pet recommendations, Hive DB, Firebase, and OpenAI API.',
         ]);
         break;
 
       case 'skills':
         _addOutput([
-          'TECH ARSENAL:',
-          '• Mobile: Flutter, Dart, Kotlin, Android Studio',
-          '• Web & Backend: Node.js, Express.js, JavaScript, Python',
-          '• Databases: Firebase, Supabase, Hive, SQLite, MongoDB',
-          '• Tools: Git, GitHub Actions, Postman, Docker, Figma, VSCode',
+          'TECHNICAL SKILLS (From Resume):',
+          '• Languages: C++, Python, SQL, Java, Dart, Bash, C, JavaScript',
+          '• Cloud & DevOps: Docker, Linux, GCP, Terraform, Jenkins, Ansible, CI/CD, Nginx',
+          '• Backend: Node.js, Express.js, Flask, REST APIs, MongoDB',
+          '• Mobile Development: Flutter, Supabase, Firebase, CI/CD, GetX, Hive DB',
+        ]);
+        break;
+
+      case 'leadership':
+        _addOutput([
+          'LEADERSHIP EXPERIENCE:',
+          'FinDrome:',
+          '• Managing Director:',
+          '  - Orchestrated large-scale college fests, directing 100+ student workforce.',
+          '  - Built inter-departmental operational frameworks bridging technical & event teams.',
+          '• Tech Head & Event Head:',
+          '  - Directed complete project lifecycle of technical initiatives to milestones.',
+          '  - Mentored 6-member engineering team & handled operations for 200+ attendees.',
+        ]);
+        break;
+
+      case 'research':
+        _addOutput([
+          'ACADEMIC RESEARCH & PUBLICATIONS:',
+          '• Springer Research Co-Author (FICTA 2025)',
+          '• Co-authored paper accepted for FICTA 2025 conference proceedings.',
+          '• Research focus on cloud-native systems, DevOps automation, and computational engineering.',
         ]);
         break;
 
       case 'education':
         _addOutput([
-          'EDUCATION HISTORY:',
-          '• B.Tech in Computer Engineering (2022 - 2028)',
-          '  Mukesh Patel School of Technology Management and Engineering',
-          '• Secondary School Certificate (2010 - 2022)',
-          '  Rustomjee International School, Mumbai',
+          'EDUCATION:',
+          '1. Mukesh Patel School of Technology Management and Engineering, Mumbai',
+          '   • B.Tech in Computer Engineering (Expected Graduation: 2028)',
+          '2. Rustomjee International School, Mumbai',
+          '   • Secondary School Certificate (SSC) (Graduated: 2022)',
         ]);
         break;
 
       case 'contact':
         _addOutput([
-          'DIRECT CONTACT:',
-          '• Email: surasaumya17@protonmail.com',
-          '• GitHub: github.com/Saumya-sura',
-          '• LinkedIn: linkedin.com/in/saumya-sura-a73734270',
+          'CONTACT INFORMATION:',
+          '• Email: surasaumya17@gmail.com',
+          '• GitHub: https://github.com/Saumya-sura',
+          '• LinkedIn: https://www.linkedin.com/in/saumya-sura-a73734270/',
+          '• Location: Mumbai, India',
         ]);
         break;
 
       case 'hire':
         _addOutput([
-          '🚀 INTERNSHIP STATUS: READY TO CONTRIBUTE',
-          '• Saumya is actively open for Software Engineering & Mobile Internships.',
-          '• Fast learner, self-directed, experienced in production apps.',
-          'Opening email client...',
+          '🚀 STATUS: OPEN FOR INTERNSHIPS & OPPORTUNITIES',
+          '• Experienced in Flutter, Cloud Infrastructure, and CI/CD.',
+          '• Launching email client to surasaumya17@gmail.com ...',
         ]);
-        launchUrl(Uri.parse('mailto:surasaumya17@protonmail.com'));
+        launchUrl(Uri.parse('mailto:surasaumya17@gmail.com'));
         break;
 
       case 'matrix':
@@ -182,7 +270,7 @@ class _TerminalPageState extends State<TerminalPage> {
 
       case 'sudo':
         _addOutput([
-          '[!] Access denied: Saumya Sura is the only authorized superuser here 😉',
+          '[!] Saumya Sura is the authenticated superuser with full root access.',
         ]);
         break;
 
@@ -194,7 +282,7 @@ class _TerminalPageState extends State<TerminalPage> {
 
       default:
         _addOutput([
-          "zsh: command not found: $cmd. Type 'help' for valid commands.",
+          "zsh: command not found: $cmd. Type 'help' for list of valid commands.",
         ]);
     }
 
@@ -212,7 +300,7 @@ class _TerminalPageState extends State<TerminalPage> {
       if (_scrollController.hasClients) {
         _scrollController.animateTo(
           _scrollController.position.maxScrollExtent,
-          duration: const Duration(milliseconds: 250),
+          duration: const Duration(milliseconds: 200),
           curve: Curves.easeOut,
         );
       }
@@ -243,7 +331,6 @@ class _TerminalPageState extends State<TerminalPage> {
         title: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
-            // Window controls
             Container(width: 10, height: 10, decoration: const BoxDecoration(color: Color(0xFFFF5F56), shape: BoxShape.circle)),
             const SizedBox(width: 6),
             Container(width: 10, height: 10, decoration: const BoxDecoration(color: Color(0xFFFFBD2E), shape: BoxShape.circle)),
@@ -276,12 +363,10 @@ class _TerminalPageState extends State<TerminalPage> {
       ),
       body: Stack(
         children: [
-          // Optional Animated Matrix Rain Canvas
           if (_matrixMode) const MatrixRainBackground(),
 
           Column(
             children: [
-              // Scrollable Output List
               Expanded(
                 child: ListView.builder(
                   controller: _scrollController,
@@ -305,7 +390,7 @@ class _TerminalPageState extends State<TerminalPage> {
                         text,
                         style: GoogleFonts.firaCode(
                           color: textColor,
-                          fontSize: 13,
+                          fontSize: 12.5,
                           height: 1.4,
                           fontWeight: type == 'input' ? FontWeight.bold : FontWeight.normal,
                         ),
@@ -315,7 +400,7 @@ class _TerminalPageState extends State<TerminalPage> {
                 ),
               ),
 
-              // Quick Action Command Chips
+              // Quick Action Chips
               Container(
                 height: 40,
                 padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -340,7 +425,10 @@ class _TerminalPageState extends State<TerminalPage> {
                           color: themeColor.withOpacity(0.4),
                           width: 1,
                         ),
-                        onPressed: () => _handleCommand(cmd),
+                        onPressed: () {
+                          SoundService().playClick();
+                          _handleCommand(cmd);
+                        },
                       ),
                     );
                   },
@@ -367,7 +455,7 @@ class _TerminalPageState extends State<TerminalPage> {
                         focusNode: _focusNode,
                         style: GoogleFonts.firaCode(
                           color: Colors.white,
-                          fontSize: 14,
+                          fontSize: 13,
                         ),
                         cursorColor: Colors.greenAccent,
                         decoration: InputDecoration(
@@ -379,6 +467,9 @@ class _TerminalPageState extends State<TerminalPage> {
                           border: InputBorder.none,
                           isDense: true,
                         ),
+                        onChanged: (_) {
+                          SoundService().playKey();
+                        },
                         onSubmitted: (value) {
                           _handleCommand(value);
                           _focusNode.requestFocus();
@@ -403,7 +494,6 @@ class _TerminalPageState extends State<TerminalPage> {
   }
 }
 
-// Matrix Digital Rain background animation
 class MatrixRainBackground extends StatefulWidget {
   const MatrixRainBackground({super.key});
 

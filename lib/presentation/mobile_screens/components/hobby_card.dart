@@ -21,6 +21,8 @@ class _HobbyCardState extends State<HobbyCard> {
 
   @override
   Widget build(BuildContext context) {
+    final isDark = Theme.of(context).brightness == Brightness.dark;
+
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
       onExit: (_) => setState(() => _isHovered = false),
@@ -29,38 +31,46 @@ class _HobbyCardState extends State<HobbyCard> {
         duration: const Duration(milliseconds: 200),
         child: Container(
           decoration: BoxDecoration(
-            color: Theme.of(context).cardColor.withOpacity(0.9),
+            color: isDark ? const Color(0xFF1E1E26) : Colors.white,
             borderRadius: BorderRadius.circular(12),
             border: Border.all(
-              color: _isHovered ? widget.color : Colors.transparent,
-              width: 1.5,
+              color: _isHovered ? widget.color : widget.color.withOpacity(0.35),
+              width: 1.2,
             ),
             boxShadow: [
               BoxShadow(
                 color: _isHovered 
-                    ? widget.color.withOpacity(0.2) 
-                    : Colors.black.withOpacity(0.05),
+                    ? widget.color.withOpacity(0.3) 
+                    : Colors.black.withOpacity(0.12),
                 blurRadius: _isHovered ? 10 : 6,
                 offset: const Offset(0, 3),
               ),
             ],
           ),
           child: Padding(
-            padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12.0),
             child: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                Icon(
-                  widget.icon,
-                  color: widget.color,
-                  size: 20,
+                Container(
+                  padding: const EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                    color: widget.color.withOpacity(0.15),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Icon(
+                    widget.icon,
+                    color: widget.color,
+                    size: 18,
+                  ),
                 ),
                 const SizedBox(width: 8),
                 Text(
                   widget.title,
-                  style: const TextStyle(
-                    fontWeight: FontWeight.w600,
-                    fontSize: 14,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 13,
+                    color: isDark ? Colors.white : Colors.black87,
                   ),
                 ),
               ],
