@@ -18,16 +18,60 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="Portfolio of Saumya Sura - Computer Engineering student, Flutter & Web Developer, creator of MPSTME OnTrack (1400+ downloads) and TOT App.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="Portfolio of Saumya Sura - Flutter Developer, Cloud & DevOps Enthusiast, Springer Research Co-Author (FICTA 2025), and creator of MPSTME OnTrack (1500+ downloads).">
   <meta name="author" content="Saumya Sura">
-  <meta name="keywords" content="Saumya Sura, Flutter Developer, Mobile App Developer, Portfolio, Dart, Firebase, NMIMS MPSTME">
+  <meta name="keywords" content="Saumya Sura, Flutter Developer, Cloud, DevOps, GCP, Docker, CI/CD, Terraform, Jenkins, Ansible, Springer, FICTA 2025, Mobile App Developer, Portfolio, NMIMS MPSTME">
+  <meta name="robots" content="index, follow">
   <meta name="theme-color" content="#2563EB">
   <meta name="google-site-verification" content="og4RqpcwyloRZVPlPUPoKdeLzWAYppyJhlx9PNqY63s" />
+  <link rel="canonical" href="https://saumya-sura.github.io/" />
 
   <!-- Open Graph / Social Sharing -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Saumya Sura | Flutter & Web Developer">
-  <meta property="og:description" content="Explore interactive mobile apps, projects, and skills built by Saumya Sura.">
+  <meta property="og:site_name" content="Saumya Sura Portfolio">
+  <meta property="og:title" content="Saumya Sura | Flutter Developer • Cloud & DevOps • Springer Co-Author">
+  <meta property="og:description" content="Explore interactive mobile apps, GCP cloud architecture, CI/CD pipelines, and software engineering projects built by Saumya Sura.">
+  <meta property="og:image" content="icons/Icon-512.png">
+  <meta property="og:locale" content="en_US">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Saumya Sura | Flutter Developer • Cloud & DevOps • Springer Co-Author">
+  <meta name="twitter:description" content="Explore interactive mobile apps, GCP cloud architecture, CI/CD pipelines, and software engineering projects built by Saumya Sura.">
+  <meta name="twitter:image" content="icons/Icon-512.png">
+
+  <!-- Structured Data: Schema.org JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Saumya Sura",
+    "jobTitle": "Flutter Developer & Cloud/DevOps Enthusiast",
+    "description": "Computer Engineering student with 3 software engineering internships in Flutter and Cloud infrastructure. Springer research co-author (FICTA 2025).",
+    "email": "surasaumya17@gmail.com",
+    "alumniOf": {
+      "@type": "EducationalOrganization",
+      "name": "Mukesh Patel School of Technology Management and Engineering, NMIMS"
+    },
+    "sameAs": [
+      "https://github.com/Saumya-sura",
+      "https://www.linkedin.com/in/saumya-sura-a73734270/"
+    ],
+    "knowsAbout": [
+      "Flutter",
+      "Dart",
+      "Google Cloud Platform (GCP)",
+      "DevOps",
+      "CI/CD Pipelines",
+      "Docker",
+      "Kubernetes",
+      "Terraform",
+      "Python",
+      "Mobile Application Development"
+    ]
+  }
+  </script>
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
@@ -38,10 +82,98 @@
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>Saumya Sura | Flutter & Web Developer</title>
+  <title>Saumya Sura | Flutter Developer • Cloud & DevOps • Springer Co-Author</title>
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+  <script>
+    (function() {
+      let audioCtx = null;
+      window.portfolioMuted = false;
+
+      function getContext() {
+        if (!audioCtx) {
+          const AudioContext = window.AudioContext || window.webkitAudioContext;
+          if (AudioContext) {
+            audioCtx = new AudioContext();
+          }
+        }
+        if (audioCtx && audioCtx.state === 'suspended') {
+          audioCtx.resume();
+        }
+        return audioCtx;
+      }
+
+      window.playPortfolioSound = function(type) {
+        if (window.portfolioMuted) return;
+        const ctx = getContext();
+        if (!ctx) return;
+
+        const now = ctx.currentTime;
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+
+        if (type === 'click') {
+          // Soft mechanical tap
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(440, now);
+          osc.frequency.exponentialRampToValueAtTime(140, now + 0.035);
+          gain.gain.setValueAtTime(0.08, now);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.035);
+          osc.start(now);
+          osc.stop(now + 0.035);
+        } else if (type === 'pop') {
+          // Dynamic Island bubble pop
+          osc.type = 'sine';
+          osc.frequency.setValueAtTime(280, now);
+          osc.frequency.exponentialRampToValueAtTime(750, now + 0.05);
+          gain.gain.setValueAtTime(0.08, now);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.05);
+          osc.start(now);
+          osc.stop(now + 0.05);
+        } else if (type === 'chime') {
+          // Harmonic palette change chime
+          osc.type = 'triangle';
+          osc.frequency.setValueAtTime(587.33, now);
+          osc.frequency.setValueAtTime(880, now + 0.06);
+          gain.gain.setValueAtTime(0.06, now);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.22);
+          osc.start(now);
+          osc.stop(now + 0.22);
+        } else if (type === 'key') {
+          // Terminal keyboard click
+          osc.type = 'square';
+          osc.frequency.setValueAtTime(850, now);
+          osc.frequency.exponentialRampToValueAtTime(220, now + 0.02);
+          gain.gain.setValueAtTime(0.03, now);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 0.02);
+          osc.start(now);
+          osc.stop(now + 0.02);
+        } else if (type === 'success') {
+          // Ascending major arpeggio
+          const notes = [523.25, 659.25, 783.99, 1046.50];
+          notes.forEach((freq, i) => {
+            const o = ctx.createOscillator();
+            const g = ctx.createGain();
+            o.type = 'sine';
+            o.frequency.setValueAtTime(freq, now + i * 0.05);
+            g.gain.setValueAtTime(0.05, now + i * 0.05);
+            g.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.05 + 0.12);
+            o.connect(g);
+            g.connect(ctx.destination);
+            o.start(now + i * 0.05);
+            o.stop(now + i * 0.05 + 0.12);
+          });
+        }
+      };
+
+      window.setPortfolioMuted = function(isMuted) {
+        window.portfolioMuted = isMuted;
+      };
+    })();
+  </script>
   <script src="flutter_bootstrap.js" async></script>
 </body>
 </html>
